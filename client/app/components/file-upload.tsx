@@ -3,33 +3,48 @@
 import React from 'react';
 import { Upload } from 'lucide-react';
 
-const handleFileUploadButtonClick = () => {
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = '.pdf';
+const FileUploadComponent: React.FC = () => {
+  const handleFileUploadButtonClick = () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'application/pdf';
 
-  input.onchange = (event: Event) => {
-    const target = event.target as HTMLInputElement;
+    input.addEventListener('change', async () => {
+      if (input.files && input.files.length > 0) {
+        const file = input.files[0];
 
-    if (target.files && target.files.length > 0) {
-      const file = target.files[0]; // ✅ correct access
-      console.log('Selected file:', file);
-    }
+        const formData = new FormData();
+        formData.append('pdf', file);
+
+        try {
+          const response = await fetch('http://localhost:8000/upload/pdf', {
+            method: 'POST',
+            body: formData,
+          });
+
+          if (!response.ok) {
+            throw new Error('Upload failed');
+          }
+
+          console.log('File uploaded successfully');
+        } catch (error) {
+          console.error('Error uploading file:', error);
+        }
+      }
+    });
+
+    input.click();
   };
 
-  input.click();
-};
-
-const FileUploadComponent: React.FC = () => {
   return (
-    <div className="bg-slate-900 text-white shadow-2xl flex justify-center items-center p-4 rounded-lg border-2 border-white">
-      <div
+    <div className="flex items-center justify-center min-h-screen bg-[#0d1117]">
+      <button
         onClick={handleFileUploadButtonClick}
-        className="flex flex-col items-center gap-2 cursor-pointer"
+        className="flex items-center gap-2 px-6 py-3 rounded-md bg-[#238636] text-white font-medium hover:bg-[#2ea043] transition"
       >
-        <h3 className="text-lg font-semibold">Upload PDF File</h3>
-        <Upload className="w-8 h-8" />
-      </div>
+        <Upload size={18} />
+        Upload PDF
+      </button>
     </div>
   );
 };
