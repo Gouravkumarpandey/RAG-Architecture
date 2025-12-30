@@ -1,4 +1,3 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 # 📚 AI PDF Chat - Scalable RAG System
 
 A full-stack AI application built with Next.js, Node.js, and LangChain that enables users to "chat" with their PDF documents. The system uses a scalable architecture with background workers and vector databases to handle document ingestion efficiently.
