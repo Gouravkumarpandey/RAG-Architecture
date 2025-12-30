@@ -35,7 +35,7 @@ A full-stack AI application built with Next.js, Node.js, and LangChain that enab
 
 ## 🏗️ System Architecture
 
-![System Design Architecture](./system-design.png)
+<img width="2083" height="1031" alt="png" src="https://github.com/user-attachments/assets/0a442467-f1f4-4135-a447-77cf54d09587" />
 
 ### Ingestion Phase
 1. User uploads a PDF via the Next.js frontend.
